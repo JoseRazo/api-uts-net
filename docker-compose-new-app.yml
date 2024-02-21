@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  dotnet-new:
+    build:
+      context: .
+      dockerfile: DockerfileNewApp
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ApiUtsNet:/app/ApiUtsNet

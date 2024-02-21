@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/app/ApiUtsNet/ApiUtsNet.csproj": {}
+    "/app/ApiUtsNet.csproj": {}
   },
   "projects": {
-    "/app/ApiUtsNet/ApiUtsNet.csproj": {
+    "/app/ApiUtsNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/ApiUtsNet/ApiUtsNet.csproj",
+        "projectUniqueName": "/app/ApiUtsNet.csproj",
         "projectName": "ApiUtsNet",
-        "projectPath": "/app/ApiUtsNet/ApiUtsNet.csproj",
+        "projectPath": "/app/ApiUtsNet.csproj",
         "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/app/ApiUtsNet/obj/",
+        "outputPath": "/app/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
@@ -37,6 +37,20 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -56,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.405/RuntimeIdentifierGraph.json"
         }
       }
     }

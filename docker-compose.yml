@@ -1,11 +1,13 @@
 version: '3.8'
 
 services:
-  dotnet-web:
+  webapp:
     image: api_uts_net:v1.0
     container_name: api-uts-net
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "5200:5000"
+    volumes:
+      - ./ApiUtsNet:/app

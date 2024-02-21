@@ -1,23 +1,25 @@
-# Use the SDK image for building the app
+# Use the .NET SDK image for building
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
-# Copy the application files to the container
+# Set the environment to development
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# Install the Entity Framework Core tools
+RUN dotnet tool install --global dotnet-ef --version 7.0.0
+
+# Copy only the project file and restore dependencies
+COPY ApiUtsNet/*.csproj .
+RUN dotnet restore
+
+# Install Microsoft.EntityFrameworkCore.SqlServer
+RUN dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.0
+
+# Copy all files to the container from the ApiUtsNet folder
 COPY ApiUtsNet/ .
 
-# Build the app
-RUN dotnet build -c Release -o /app/out
+# Expose the default port (change if your app uses a different port)
+EXPOSE 5000
 
-# Use a runtime image for the final image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
-WORKDIR /app
-COPY --from=build /app/out .
-
-# COPY static files css, js, libs, etc
-COPY ApiUtsNet/wwwroot /app/wwwroot
-
-# Expose the port
-EXPOSE 80
-
-# Start the app
-ENTRYPOINT ["dotnet", "ApiUtsNet.dll"]
+# Use 'CMD' to run the application with 'dotnet watch run'
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]

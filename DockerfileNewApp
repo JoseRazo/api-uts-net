@@ -1,0 +1,21 @@
+# Usa la imagen oficial de .NET 7 como base
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /app
+
+# Establece el ambiente a desarrollo
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# Expone el puerto 80
+EXPOSE 80
+
+# Copia el script de inicialización al contenedor
+COPY init.sh /app/
+
+# Cambia los permisos del script para que sea ejecutable
+RUN chmod +x /app/init.sh
+
+# Establece el directorio de trabajo para la aplicación ASP.NET Core
+WORKDIR /app/ApiUtsNet
+
+# Establece el comando por defecto para ejecutar el script de inicialización
+ENTRYPOINT ["/bin/bash", "/app/init.sh"]
